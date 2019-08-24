@@ -1,0 +1,39 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+npm-error.log*
+
+# Runtime data
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# Grunt intermediate storage (http://gruntjs.com/creating-plugins#storing-task-files)
+.grunt
+
+# Bower dependency directory (https://bower.io/)
+bower_components
+
+# Dependency directories
+node_modules/
+jspm_packages/
+
+# Optional npm cache directory
+.npm
+
+# Optional eslint cache
+.eslintcache
+
+# Vagrant specific
+.vagrant
+
+# Local db file
+wallets.db
+
+# Code coverage files
+coverage/
+
+# Environment specific
+.env
