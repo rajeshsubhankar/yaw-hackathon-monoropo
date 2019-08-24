@@ -10,6 +10,11 @@ config.INFURA = {
   GORLI: 'https://goerli.infura.io/v3/d7ef95bbf433420a96fa91c4a35b200b',
 }
 
-config.NETWORK = 'ropsten';
+config.ECTools_ADDRESS = {
+  ROPSTEN: '0x6d35b74c75d60d1170CfF354d8CB5083AB6c3009',
+  KOVAN: '0x4dc1bD11F305e7733f3afe21b95560Dd0Db0B174',
+}
+
+config.NETWORK = 'kovan';
 
 module.exports = config;

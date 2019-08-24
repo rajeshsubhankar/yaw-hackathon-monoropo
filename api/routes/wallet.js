@@ -2,11 +2,20 @@ var express = require('express');
 const Web3 = require('web3');
 const EthereumTx = require('ethereumjs-tx').Transaction;
 const config = require('../config');
-const walletABI = require('../abi/wallet.json');
+let walletABI = require('../abi/wallet.json');
 const testABI = require('../abi/test.json');
 
 var router = express.Router();
-const web3 = new Web3(config.INFURA.ROPSTEN);
+const web3 = new Web3(config.INFURA.KOVAN);
+
+function link(bytecode, libName, libAddress) {
+    let symbol = "__" + libName + "_".repeat(40 - libName.length - 2);
+    return bytecode.split(symbol).join(libAddress.toLowerCase().substr(2))
+  }
+
+walletABI.bytecode = link(walletABI.bytecode, "ECTools", config.ECTools_ADDRESS.KOVAN);
+
+
 
 const privateKey = Buffer.from(
   config.FAUCET_PRIVATE_KEY,
@@ -33,10 +42,10 @@ return `0x${serializedTx}`;
 
 /* Create raw contract deployment tx*/
 const createRawWalletDeployTx = async (eoa) => {
-  const walletContract = new web3.eth.Contract(testABI.abi);
+  const walletContract = new web3.eth.Contract(walletABI.abi);
   const encodeAbi = walletContract.deploy({
-    data: testABI.bytecode,
-    // arguments: [eoa.address]
+    data: walletABI.bytecode,
+    arguments: [eoa.address]
   }).encodeABI();
 
   const nonce = await web3.eth.getTransactionCount(eoa.address);
